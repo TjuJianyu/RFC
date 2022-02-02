@@ -15,17 +15,13 @@ from mydatasets import coloredmnist
 
 from models import MLP, TopMLP
 
-from utils import pretty_print, correct_pred,GeneralizedCELoss, EMA, mean_weight, mean_nll, mean_mse, mean_accuracy,validation
+from utils import pretty_print, correct_pred,GeneralizedCELoss, EMA, mean_weight, mean_nll, mean_mse, mean_accuracy,validation, parse_bool
 
 from train import get_train_func
 
 
 
 def main(flags):
-    if flags.verbose:
-        print('Flags:')
-        for k,v in sorted(vars(flags).items()):
-            print("\t{}: {}".format(k, v))
     if flags.save_dir is not None and not os.path.exists(flags.save_dir):
         os.makedirs(flags.save_dir)
     flags.freeze_featurizer = False if flags.freeze_featurizer.lower() == 'false' else True 
@@ -95,18 +91,13 @@ def main(flags):
             new_envs = []
 
             for group in groups:
-                print(group.mean())
                 for val in np.unique(group):
-                    #print(val)
-                    #print(x[group == val].shape)
                     env = {}
                     env['images'] = x[group == val]
                     env['labels'] = y[group == val]
 
                     new_envs.append(env)
             train_envs = new_envs
-
-            print(groups)
 
         else:
             train_envs = envs
@@ -167,12 +158,9 @@ def main(flags):
                 y = torch.cat([env['labels'] for env in envs])
                 logits = topmlp(mlp(x))
             group, _ = correct_pred(logits, y)
-            #print(group)
 
             pseudolabel = np.copy(y.cpu().numpy().flatten())
             pseudolabel[~group] = 1-pseudolabel[~group]
-            #print(pseudolabel)
-            #print(y.cpu().numpy().flatten())
             np.save(os.path.join(flags.save_dir,'group%d.npy' % restart), group)
             np.save(os.path.join(flags.save_dir,'pseudolabel%d.npy' % restart), pseudolabel )
 
@@ -219,8 +207,19 @@ if __name__ == "__main__":
 
     parser.add_argument('--n_examples', type=int, default=18000)
 
-  
+    parser.add_argument('--norun',type=parse_bool, default=False)
     flags = parser.parse_args()
 
-    main(flags)
+    if flags.norun:
+        if flags.verbose:
+            print('Flags:')
+            for k,v in sorted(vars(flags).items()):
+                print("\t{}: {}".format(k, v))
+    else:   
+        main(flags)
+
+
+
+
+
 

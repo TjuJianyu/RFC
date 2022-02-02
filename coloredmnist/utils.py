@@ -4,6 +4,15 @@ import torch
 import torch.nn.functional as F
 
 import numpy as np
+
+def parse_bool(v):
+    if v.lower()=='true':
+        return True
+    elif v.lower()=='false':
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 def pretty_print(*values):
     col_width = 13
     def format_val(v):
@@ -12,7 +21,8 @@ def pretty_print(*values):
         return v.ljust(col_width)
     str_values = [format_val(v) for v in values]
     print(" ".join(str_values))
- # Define loss function helpers
+
+# Define loss function helpers
 def mean_weight(weights):
     
     weight = copy.deepcopy(weights[0])
@@ -84,8 +94,6 @@ def validation_details(topmlp, mlp, envs, test_envs, lossf):
             env['nll'] = lossf(logits, env['labels'])
             env['acc'] = mean_accuracy(logits, env['labels'])
 
-    #test_worst_loss = torch.stack([env['nll'] for env in test_envs]).max()
-    #test_worst_acc  = torch.stack([env['acc'] for env in test_envs]).min()
     train_loss = torch.stack([env['nll'] for env in envs]).mean()
     train_acc  = torch.stack([env['acc'] for env in envs]).mean()
     
@@ -98,22 +106,9 @@ def validation2(model, envs, test_envs, lossf):
     with torch.no_grad():
         for env in envs + test_envs:
             logits = model(env['images'])
-            #lossf = mean_nll if flags.lossf == 'nll' else mean_mse 
-            #env['nll'] = F.cross_entropy(logits, env['labels'].long().flatten())
-            #env['acc'] = mean_accuracy(logits, env['labels'].long().flatten())
-            # if lossf is F.cross_entropy:
-            #     # TODO what is that? 
-            #     env['nll'] = lossf(logits, env['labels'].long().flatten())
-            #     env['acc'] = mean_accuracy(logits, env['labels'].long().flatten())
 
-            # else:
             env['nll'] = lossf(logits, env['labels'])
             env['acc'] = mean_accuracy(logits, env['labels'])
-
-            
-            #print('----',env['nll'])
-            # env['nll'] = lossf(logits, env['labels'])
-            # env['acc'] = mean_accuracy(logits, env['labels'])
 
     test_worst_loss = torch.stack([env['nll'] for env in test_envs]).max()
     test_worst_acc  = torch.stack([env['acc'] for env in test_envs]).min()

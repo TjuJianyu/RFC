@@ -1,3 +1,4 @@
+# modified from https://github.com/YujiaBao/Predict-then-Interpolate/blob/main/src/main.py
 import argparse
 import numpy as np
 import torch
@@ -153,8 +154,5 @@ for step in range(flags.n_restarts):
 				pretty_print(*log)
 
 np.save('../../log/final/%s_%s_PI_%d.npy' % (flags.dataset,flags.lossf, flags.steps1), logs)
-
-#np.save(os.path.join(flags.save_dir,'logs.npy'), logs)
-
 
 

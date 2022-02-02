@@ -11,10 +11,10 @@ from backpack.extensions import BatchGrad
 
 from collections import OrderedDict
 
-#from rich_representation import feature_disentangle, rich_representation_by_sampling , RFC
 
-from mydatasets import coloredmnist,cow_camel
+from mydatasets import coloredmnist
 from models import MLP, TopMLP
+
 from utils import pretty_print, correct_pred,GeneralizedCELoss, EMA, mean_weight, mean_nll, mean_mse, mean_accuracy,validation,validation_details
 
 
@@ -40,8 +40,6 @@ def IGA_penalty(envs_logits, envs_y, scale, lossf):
 
 def IRM_penalty(envs_logits, envs_y, scale, lossf):
 
-    #scale = torch.tensor([1.]*flags.rep_size).cuda().requires_grad_()
-    #lossf = mean_nll if flags.lossf == 'nll' else mean_mse 
     train_penalty = 0 
     for i in range(len(envs_logits)):
         loss = lossf(envs_logits[i], envs_y[i])
@@ -53,7 +51,6 @@ def IRM_penalty(envs_logits, envs_y, scale, lossf):
     return train_penalty
 
 def GM_penalty(envs_logits, envs_y, scale, lossf):
-    #@lossf = mean_nll if flags.lossf == 'nll' else mean_mse 
     
     grads = []
     grad_mean = 0
@@ -81,9 +78,6 @@ def rsc_train(mlp, topmlp,
     
     if freeze_featurizer:
         optimizer = optimizer = optim.Adam( [var for var in topmlp.parameters()],  lr=lr) 
-        #for param in mlp.parameters():
-        #    param.requires_grad = False 
-
     else:
         optimizer = optimizer = optim.Adam([var for var in mlp.parameters()] + \
             [var for var in topmlp.parameters()],  lr=lr) 
@@ -111,10 +105,6 @@ def rsc_train(mlp, topmlp,
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-        # elif step == penalty_anneal_iters:
-        #     # reset optimizer
-        #     optimizer = optim.Adam([var for var in mlp.parameters()] + \
-        #         [var for var in topmlp.parameters()],  lr=lr / 2) 
         else:
             # Equation (1): compute gradients with respect to representation
             all_g = autograd.grad((all_p * all_o).sum(), all_f)[0]
@@ -158,9 +148,8 @@ def rsc_train(mlp, topmlp,
             logs.append(log)
             if verbose:
                 pretty_print(*log)
+    
     return (train_acc, train_loss, test_worst_acc, test_worst_loss), logs
-
-    #python -u rich_rep_irmv2.py   --hidden_dim=390   --l2_regularizer_weight=0.00110794568   --lr=0.0001  --verbose True --penalty_anneal_iters=100 --steps=501 --methods rsc --dataset coloredmnist025 --rep_init other
 
 def vrex_train(mlp, topmlp, steps, envs, test_envs, lossf, \
     penalty_anneal_iters, penalty_term_weight, anneal_val, \
@@ -188,13 +177,9 @@ def vrex_train(mlp, topmlp, steps, envs, test_envs, lossf, \
             erm_losses.append(env['nll'])
 
         erm_losses = torch.stack(erm_losses)
-        #erm_loss = erm_loss.mean()
-        #erm_loss = erm_losses.mean()
+        
         train_penalty = erm_losses.var()
         erm_loss = erm_losses.sum() 
-
-        #train_penalty = (envs[0]['nll'] - envs[1]['nll'])**2
-        #erm_loss = (envs[0]['nll'] + envs[1]['nll'])
 
         loss = erm_loss.clone()
 
@@ -222,6 +207,7 @@ def vrex_train(mlp, topmlp, steps, envs, test_envs, lossf, \
             logs.append(log)
             if verbose:
                 pretty_print(*log)
+    
     return (train_acc, train_loss, test_worst_acc, test_worst_loss), logs
 
 def iga_train(mlp, topmlp, steps, envs, test_envs, lossf, \
@@ -230,8 +216,6 @@ def iga_train(mlp, topmlp, steps, envs, test_envs, lossf, \
     
     if freeze_featurizer:
         optimizer = optimizer = optim.Adam( [var for var in topmlp.parameters()],  lr=lr) 
-        # for param in mlp.parameters():
-        #     param.requires_grad = False 
        
     else:
         optimizer = optimizer = optim.Adam([var for var in mlp.parameters()] + \
@@ -246,7 +230,6 @@ def iga_train(mlp, topmlp, steps, envs, test_envs, lossf, \
         erm_loss = 0
         for env in envs:
             logits = topmlp(mlp(env['images']))
-            #lossf = mean_nll if flags.lossf == 'nll' else mean_mse 
             env['nll'] = lossf(logits, env['labels'])
             env['acc'] = mean_accuracy(logits, env['labels'])
             envs_logits.append(logits)
@@ -318,17 +301,14 @@ def dro_train(mlp, topmlp, steps, envs, test_envs, lossf, \
             envs_logits.append(logits)
             envs_y.append(env['labels'])
             erm_losses.append(env['nll'])
-        #print(erm_losses)
+        
         loss = max(erm_losses)
-        #print(loss)
-
+        
         weight_norm = 0
         for w in [var for var in mlp.parameters()] + [var for var in topmlp.parameters()]:
             weight_norm += w.norm().pow(2)
         loss += l2_regularizer_weight * weight_norm
-
-
-          
+  
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -361,7 +341,9 @@ def sd_train(mlp, topmlp, steps, envs, test_envs, lossf, \
         erm_loss = 0
         for env in envs:
             logits = topmlp(mlp(env['images']))
-            lossf = mean_nll if lossf == 'nll' else mean_mse 
+            
+            #lossf = mean_nll if lossf == 'nll' else mean_mse
+
             env['nll'] = lossf(logits, env['labels'])
             env['acc'] = mean_accuracy(logits, env['labels'])
         
@@ -390,8 +372,7 @@ def sd_train(mlp, topmlp, steps, envs, test_envs, lossf, \
         if penalty_anneal_iters > 0 and step >= penalty_anneal_iters:
             # using anneal, so decay lr
             loss /= hparams['lr_s2_decay']
-            #print(hparams['lr_s2_decay'])
-            #loss /= 500
+            
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -428,7 +409,6 @@ def irm_train(mlp, topmlp, steps, envs, test_envs, lossf, \
         scale = torch.tensor([1.])[0].cuda().requires_grad_() 
         for env in envs:
             logits = topmlp(mlp(env['images'])) * scale
-            #lossf = mean_nll if flags.lossf == 'nll' else mean_mse 
             env['nll'] = lossf(logits, env['labels'])
             env['acc'] = mean_accuracy(logits, env['labels'])
             envs_logits.append(logits)
@@ -479,8 +459,7 @@ def clove_train(mlp, topmlp, steps, envs, test_envs, lossf, \
     else:
         optimizer = optimizer = optim.Adam([var for var in mlp.parameters()] + \
             [var for var in topmlp.parameters()],  lr=lr) 
-    #optimizer = optim.Adagrad([var for var in mlp.parameters()] \
-    #        +[var for var in topmlp.parameters()], lr=lr)
+    
     logs = []
     batch_size = hparams['batch_size'] if 'batch_size' in hparams else 512
     kernel_scale = hparams['kernel_scale'] if 'kernel_scale' in hparams else 0.4
@@ -492,7 +471,7 @@ def clove_train(mlp, topmlp, steps, envs, test_envs, lossf, \
         preds = F.sigmoid(logits).flatten()
 
         y_hat = (preds < 0.5).detach().bool()
-        #print(preds)
+        
         confidence = torch.ones(len(y_hat)).cuda()
         confidence[y_hat] = 1-preds[y_hat]
         confidence[~y_hat] = preds[~y_hat]
@@ -508,7 +487,6 @@ def clove_train(mlp, topmlp, steps, envs, test_envs, lossf, \
 
     pretty_print('step', 'train nll', 'train acc', 'train penalty', 'test acc')
 
-   # batch_size = 512
     for step in range(steps):
         length = min(len(envs[0]['labels']), len(envs[1]['labels']))
 
@@ -534,10 +512,8 @@ def clove_train(mlp, topmlp, steps, envs, test_envs, lossf, \
                 train_nll += nll 
                 train_acc += acc 
 
-        #train_nll /=2
         train_acc /=2
-        #train_penalty /= 2 
-
+        
 
         weight_norm = torch.tensor(0.).cuda()
         for w in mlp.parameters():
@@ -618,12 +594,10 @@ def fishr_train(mlp, topmlp, steps, envs, test_envs, lossf, \
     bce_extended = extend(nn.BCEWithLogitsLoss())
     for step in range(steps):
         for edx, env in enumerate(envs):
-            #features, logits = topmlp(mlp(env['images']))
             features = mlp(env['images'])
             logits = topmlp(features)
             env['nll'] = mean_nll(logits, env['labels'])
             env['acc'] = mean_accuracy(logits, env['labels'])
-            #env['irm'] = compute_irm_penalty(logits, env['labels'])
             if edx in [0, 1]:
                 # True when the dataset is in training
                 optimizer.zero_grad()
@@ -683,8 +657,6 @@ def gm_train(mlp, topmlp, steps, envs, test_envs, lossf, \
 
     if freeze_featurizer:
         optimizer = optimizer = optim.Adam( [var for var in topmlp.parameters()],  lr=lr) 
-        # for param in mlp.parameters():
-        #     param.requires_grad = False 
     else:
         optimizer = optimizer = optim.Adam([var for var in mlp.parameters()] + \
             [var for var in topmlp.parameters()],  lr=lr) 
@@ -696,7 +668,6 @@ def gm_train(mlp, topmlp, steps, envs, test_envs, lossf, \
         envs_y = []
         for env in envs:
             logits = topmlp(mlp(env['images']))
-            #lossf = mean_nll if flags.lossf == 'nll' else mean_mse 
             env['nll'] = lossf(logits, env['labels'])
             env['acc'] = mean_accuracy(logits, env['labels'])
             envs_logits.append(logits)
@@ -830,9 +801,7 @@ def lff_train(mlp, topmlp, steps, envs, test_envs, lossf, \
 
         loss_b_update = bias_criterion(logit_b, y)
         loss_d_update = criterion(logit_d, y) * loss_weight.cuda()
-        #print(loss_weight)
         loss = loss_b_update.mean() + loss_d_update.mean()
-        #loss =loss_b_update.mean() +  criterion(logit_d, y).mean() 
         
         optimizer_b.zero_grad()
         optimizer_d.zero_grad()
@@ -859,11 +828,9 @@ def erm_train(mlp, topmlp, steps, envs, test_envs, lossf, \
     
     x = torch.cat([envs[i]['images'] for i in range(len(envs))])
     y = torch.cat([envs[i]['labels'] for i in range(len(envs))])
-    print(x.shape)
+
     if freeze_featurizer:
         optimizer = optimizer = optim.Adam( [var for var in topmlp.parameters()],  lr=lr) 
-        #optimizer = optimizer = optim.Adam( [topmlp.lin1.bias],  lr=lr) 
-        
         for param in mlp.parameters():
             param.requires_grad = False 
         print('freeze_featurizer')
@@ -900,14 +867,7 @@ def erm_train(mlp, topmlp, steps, envs, test_envs, lossf, \
             logs.append(log)
             if verbose:
                 pretty_print(*log)
-        # if step % eval_steps == 0:
-        #     train_loss, train_acc, test_worst_loss, test_worst_acc = \
-        #     validation_details(topmlp, mlp, envs, test_envs, lossf)
-        #     log = [np.int32(step), train_loss, train_acc,\
-        #         train_penalty.detach().cpu().numpy(),*test_worst_loss, *test_worst_acc]
-        #     logs.append(log)
-        #     if verbose:
-        #         pretty_print(*log)
+        
     return (train_acc, train_loss, test_worst_acc, test_worst_loss), logs
 
 def syn_train(mlp, topmlp, steps, envs, test_envs, lossf, \
@@ -926,7 +886,6 @@ def syn_train(mlp, topmlp, steps, envs, test_envs, lossf, \
 
         per_logits_size = logits.shape[1] // ntasks
         per_y_size = y.shape[1] // ntasks
-        #print(per_logits_size, per_y_size)
         loss = 0
         for i in range(ntasks):
 
@@ -949,19 +908,8 @@ def syn_train(mlp, topmlp, steps, envs, test_envs, lossf, \
 
 
         if step % eval_steps == 0:
-            # n_groups = 2 
-            # with torch.no_grad():
-                
-            #     accs = []
-            #     for env in envs + test_envs:
-            #         logits = topmlp(mlp(env['images']))
-
-            #         for i in range(n_groups):
-            #             acc = mean_accuracy(logits[:,i:i+1], env['labels'])
-            #             accs.append("%.3f" % acc.item())
-            #     print(accs)
+            
             with torch.no_grad():
-                #print(len(envs),len(test_envs))
                 for j, env in enumerate(envs + test_envs):
                     logits = topmlp(mlp(env['images']))
                     loss =  0
@@ -973,20 +921,10 @@ def syn_train(mlp, topmlp, steps, envs, test_envs, lossf, \
                             per_y = env['labels'][:,i*per_y_size:(i+1)*per_y_size] 
                         else:
                             per_y = env['labels']
-                        
-                        #loss += lossf(per_logits,per_y)
                         loss += lossf(per_logits,per_y)
                         
                         acc += mean_accuracy(per_logits, per_y)
-                        #print(mean_accuracy(per_logits, per_y))
-                        #print(mean_accuracy(per_logits, per_y))
                     
-                    # print('logits l1',torch.abs(logits).mean().item())
-                    # top_w_norm = 0
-                    # for w in [var for var in topmlp.parameters()]:
-                    #     top_w_norm += w.norm().pow(2)
-
-                    #print(top_w_norm.item())
                     loss /= ntasks
                     acc /=ntasks
 
