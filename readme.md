@@ -3,14 +3,17 @@
 ## required environments
 ...
 
-## optimization difficulties of OOD methods (coloredmnist)
+## Optimization difficulties of OOD methods (ColoredMNIST)
+
+xfun::embed_file("figures/anneal_nll_full.pdf")
 
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 ## generalization difficulties of OOD methods (ColoredMNIST)
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
 
-## RFC
+## The proposed RFC on ColoredMNIST and InverseColoredMNIST
+
 `bash  script/coloredmnist/coloredmnist_rfc.sh`
 `bash  script/coloredmnist/inversecoloredmnist_rfc.sh`
 
