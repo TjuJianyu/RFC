@@ -3,9 +3,13 @@
 ## required environments
 ...
 
-## optimization difficulties of OOD methods (ColoredMNIST)
+## optimization difficulties of OOD methods (coloredmnist)
 
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 ## generalization difficulties of OOD methods (ColoredMNIST)
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
+
+## RFC
+`bash  script/coloredmnist/coloredmnist_rfc.sh`
+`bash  script/coloredmnist/inversecoloredmnist_rfc.sh`
