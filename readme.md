@@ -4,8 +4,7 @@
 ...
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
-
-xfun::embed_file("figures/anneal_nll_full.pdf")
+<embed src='figures/anneal_nll_full.pdf' type='application/pdf'>
 
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
