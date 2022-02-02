@@ -9,6 +9,8 @@
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 ## generalization difficulties of OOD methods (ColoredMNIST)
+<image src='figures/long_train_vstack.png'>
+
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
 
 ## The proposed RFC on ColoredMNIST and InverseColoredMNIST
@@ -18,6 +20,8 @@
 
 
 ## Camelyon17 experiments
+
+<image src='figures/lambda_valid_test_irm_vrex_clove.png'>
 
 `resdir=results/erm_camelyon17_wd0.01_seed${final_seed}`
 
