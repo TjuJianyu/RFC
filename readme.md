@@ -4,8 +4,8 @@
 ...
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
-<image src='figures/anneal_nll_full.pdf'>
-	
+<image src='figures/anneal_nll_full'>
+
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 ## generalization difficulties of OOD methods (ColoredMNIST)
