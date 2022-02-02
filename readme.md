@@ -4,12 +4,16 @@
 ...
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
-<image src='figures/anneal_nll_full.png'>
+<p align="center">
+  <image src='figures/anneal_nll_full.png'/>
+</p>
 
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 ## generalization difficulties of OOD methods (ColoredMNIST)
-<image src='figures/long_train_vstack.png'>
+<p align="center">
+<image src='figures/long_train_vstack.png'/>
+</p>
 
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
 
@@ -20,8 +24,9 @@
 
 
 ## Camelyon17 experiments
-
+<p align="center">
 <image src='figures/lambda_valid_test_irm_vrex_clove.png'>
+</p>
 
 `resdir=results/erm_camelyon17_wd0.01_seed${final_seed}`
 
