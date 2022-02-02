@@ -38,6 +38,7 @@ parser.add_argument('--lr', type=float, default=0.0005 )
 parser.add_argument('--steps1', type=int, default=51)
 parser.add_argument('--steps3', type=int, default=701)
 parser.add_argument('--lossf', type=str, default='nll')
+parser.add_argument('--save_dir', type=str, default='.')
 
 flags = parser.parse_args()
 if flags.dataset == 'coloredmnist025':
@@ -153,6 +154,6 @@ for step in range(flags.n_restarts):
 			if flags.verbose:
 				pretty_print(*log)
 
-np.save('../../log/final/%s_%s_PI_%d.npy' % (flags.dataset,flags.lossf, flags.steps1), logs)
+np.save(os.path.join(flags.save_dir, '%s_%s_PI_%d.npy' % (flags.dataset,flags.lossf, flags.steps1)), logs)
 
 

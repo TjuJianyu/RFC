@@ -1,11 +1,11 @@
 
-round=1
+round=10
 
-data=coloredmnist025;
-ermstep=50;
-rfcstep=500;
-synstep=500;
-l2=0.0011;
+data=coloredmnist01;
+ermstep=151;
+rfcstep=401;
+synstep=501;
+l2=0.0001;
 lr=0.0005;
 
 ermresdir=results/${data}_erm${ermstep}_l2${l2}_lr${lr}
@@ -34,24 +34,31 @@ python  coloredmnist/run_exp_syn.py   --verbose True --steps ${synstep} \
 --l2_regularizer_weight ${l2} \
 --lr ${lr} --n_restarts ${round} 
 
-for freeze_featurizer in True False;
+for freeze_featurizer in True;
 do 
 	
 	for method in irm clove vrex iga fishr sd;
 	do
 		if [ ${method} == irm ]
 		then 
-			methodstep=3001
+			methodstep=10001
 		else 
-			methodstep=1001
+			methodstep=2001
 		fi 
+
 
 		if [ ${method} == sd ]
 		then 
-			penalty_weight_array=(10 50 100 500 1000)
+			penalty_weight_array=(0.05 0.1 0.5 1 5)
+
+		elif [ ${method} == clove ]
+		then 
+			penalty_weight_array=(1 5 10 50 100 500)
+		
 		else
 			penalty_weight_array=(1000 5000 10000 50000 100000)
 		fi
+
 
 		for i in 0 1 2 3 4;
 		do 
@@ -91,4 +98,7 @@ do
 
 done 
 
+
+#PI
+python coloredmnist/PI.py --steps1 ${ermstep} --dataset ${data} --l2_regularizer_weight ${l2} --save_dir results/${data}_erm${ermstep}_l2${l2}_lr${lr}_PI	
 

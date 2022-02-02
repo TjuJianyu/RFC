@@ -57,7 +57,7 @@ do
 					--dataset ${data} \
 					--penalty_weight ${penalty_weight} \
 					--l2_regularizer_weight ${l2} \
-					--lr 0.0005 \
+					--lr 0.0005 --hidden_dim 390 \
 					--freeze_featurizer False \
 					--eval_steps 1 \
 					--rsc_f ${rsc_f} --rsc_b ${rsc_b} --anneal_val ${anneal_val} \
@@ -69,7 +69,7 @@ do
 					--dataset ${data} \
 					--penalty_weight ${penalty_weight} \
 					--l2_regularizer_weight ${l2} \
-					--lr 0.0005 \
+					--lr 0.0005 --hidden_dim 390 \
 					--freeze_featurizer False \
 					--eval_steps 1 --anneal_val ${anneal_val} \
 					--norun False 
