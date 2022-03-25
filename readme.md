@@ -1,7 +1,18 @@
 # Official code for "Rich Feature Construction for the Optimization-Generalization Dilemma"
 
 ## required environments
-...
+
+* wilds==2.0.0
+* einops=0.4.1
+* python=3.6.13
+* pytorch=1.10.2
+* torch-geometric=2.0.3
+* torch-scatter=2.0.9
+* torch-sparse=0.6.12
+* torchvision=0.11.3
+* tqdm=4.62.3
+* transformers=4.17.0
+
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
 <p align="center">
