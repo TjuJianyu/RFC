@@ -31,17 +31,27 @@ The rule above is also the key idea of the proposed Rich Feature Construction (R
 
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
+OOD methods are sensitive to the network initialization. 
 <p align="center">
   <image src='figures/anneal_nll_full.png'/>
+  Test performance of nine penalized OoD methods as
+a function of the number of epochs used to pre-train the neural
+network with ERM. The final OoD testing performance is very
+dependent on choosing the right number of pretraining epochs,
+illustrating the challenges of these optimization problems.
 </p>
+
+
 
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 ## generalization difficulties of OOD methods (ColoredMNIST)
 <p align="center">
 <image src='figures/long_train_vstack.png'/>
+
 </p>
 
+To 
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
 
 ## The proposed RFC on ColoredMNIST and InverseColoredMNIST
