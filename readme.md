@@ -1,15 +1,18 @@
-# Official code for "Rich Feature Construction for the Optimization-Generalization Dilemma"
+# Official code for "[Rich Feature Construction for the Optimization-Generalization Dilemma](https://arxiv.org/pdf/2203.15516.pdf)"
 
-## Story
+## Overview 
+In Machine Learning, defining a generalized goal (e.g. the invariant goal in out-of-distribution generalization) and finding a path to the goal (e.g. the many optimization tricks) are two key problems. Usually, there is a dilemma between the two. i.e. either the generalization goal is weak/poor or the optimization process is hard. This optimization-generalization dilemma is especially obvious in the out-of-distribution area. This work tries to solve this dilemma by creating a RICH and SIMPLE representation, such that the optimization process becomes easier with the representation. As a result, we can pursue a stronger generalization goal.
+
+
+
+### A short Story
 Two common questions, in many areas, are: "where is our goal?" and "how to reach the goal from our current position?". A successful project needs to answer both questions. The two questions, however, are contradicted in difficulty. When the goal is ambiguous, normally the path to the goal is blurry. When the path is clear and confident, normally the goal is plain. For the goal of "making a cup of espresso?", for instance, most people can have a clear precise path immediately. On the other hand, "Building a spacecraft to Jupyter" is an ambiguous goal. But most people have no idea about how to achieve it. 
 
 Can we build a spacecraft by purely thinking about the "spacecraft"? No. The spacecraft is built based on the development of diverse areas, such as material, computer, engine. 
 
 The story above revises the path to hard problems, that is "Search/develop diverse areas (directions). Then a clear path may appear upon them. Otherwise, continuing search more."
 
-The rule above is very common in human history. That is why we think this project, which comes from the rule, is interesting in Machine Learning. 
-
-
+The rule above is also the key idea of the proposed Rich Feature Construction (RFC) method. 
 
 
 
@@ -44,6 +47,7 @@ The rule above is very common in human history. That is why we think this projec
 ## The proposed RFC on ColoredMNIST and InverseColoredMNIST
 
 `bash  script/coloredmnist/coloredmnist_rfc.sh`
+
 `bash  script/coloredmnist/inversecoloredmnist_rfc.sh`
 
 
