@@ -31,27 +31,28 @@ The rule above is also the key idea of the proposed Rich Feature Construction (R
 
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
-OOD methods are sensitive to the network initialization. 
+OOD methods are sensitive to the network initialization. None of the nine OOD methods can work with a random initialzation. 
+
 <p align="center">
   <image src='figures/anneal_nll_full.png'/>
+</p>
+
+<p align="center">
   Test performance of nine penalized OoD methods as
 a function of the number of epochs used to pre-train the neural
 network with ERM. The final OoD testing performance is very
 dependent on choosing the right number of pretraining epochs,
 illustrating the challenges of these optimization problems.
 </p>
-
-
-
+ 
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 ## generalization difficulties of OOD methods (ColoredMNIST)
 <p align="center">
 <image src='figures/long_train_vstack.png'/>
-
 </p>
 
-To 
+
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
 
 ## The proposed RFC on ColoredMNIST and InverseColoredMNIST
@@ -66,17 +67,22 @@ To
 <image src='figures/lambda_valid_test_irm_vrex_clove.png'>
 </p>
 
-`resdir=results/erm_camelyon17_wd0.01_seed${final_seed}`
+### ERM baseline 
 
-`python src/run_expt.py --version "1.0" --root_dir data/camelyon17/ --log_dir ${resdir} \
+`python examples/run_expt.py --version "1.0" --root_dir ${directory to your data} --log_dir ${resdir} \
 --dataset camelyon17 --algorithm ERM --model densenet121 --seed ${final_seed} --save_step 1 \
---weight_decay 0.01`
+--weight_decay ${final_wd} `
 
 
-`python src/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
---log_dir results/${method}_camelyon17_anneal${final_anneal}_lambda${final_lambda}_seed${final_seed} \
---dataset camelyon17 --algorithm ${method} --model densenet121 --seed ${final_seed} \
---save_step 1 --irm_penalty_anneal_iters ${final_anneal} --irm_lambda ${final_lambda}`
+### IRM/VREX/CLOvE baseline 
+
+`python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
+--log_dir ${resdir} --dataset camelyon17 \
+--algorithm IRM/VREX/CLOvE \
+--model densenet121 --seed ${final_seed} --save_step 1 --irm_penalty_anneal_iters ${final_anneal} \
+--irm_lambda ${final_lambda} --kernel_scale ${kernel_scale_for_CLOvE}`
 
 
-...
+
+
+

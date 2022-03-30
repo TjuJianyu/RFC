@@ -6,10 +6,12 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32000
+#SBATCH --account=cds
 #SBATCH --array=0-4
-#SBATCH --chdir=
-#SBATCH --output=
+#SBATCH --chdir=/home/jz3786/wilds
+#SBATCH --output=/home/jz3786/wilds/logs/%x-%j.out
 
+source /share/apps/anaconda3/2020.07/etc/profile.d/conda.sh 
 conda activate py36;
 
 i=0;
@@ -34,7 +36,4 @@ resdir=results/erm_camelyon17_wd${final_wd}_seed${final_seed}
 python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ --log_dir ${resdir} \
 --dataset camelyon17 --algorithm ERM --model densenet121 --seed ${final_seed} --save_step 1 \
 --weight_decay ${final_wd}
-
-
-
 
