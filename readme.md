@@ -46,6 +46,7 @@ illustrating the challenges of these optimization problems.
 </p>
  
 To reproduce the results, run: 
+
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
 
@@ -64,12 +65,48 @@ Starting from a 'perfect' initialization where the model only uses the robust fe
   Bottom: The OoD methods are trained from the proposed (frozen) RFC representation.
 </p>
 
-To reproduce this results (top), run:
+To reproduce the results (top), run:
+
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
 
-## The proposed RFC on ColoredMNIST and InverseColoredMNIST
+
+## The proposed RFC on ColoredMNIST
+The proposed RFC method creates a **rich** & **simple** representation to solve the optimization-generalization dilemma above. Tab1 shows the comparison of Random initialization (Rand), ERM pretrained initialization (ERM), RFC pretrained initialization (RFC / RFC(cf)). The proposed RFC consistantly boost OOD methods. 
+
+<p align="center">
+<image src="figures/coloredmnist.png"/>
+</p>
+<p align="center">
+  Tab1: OoD testing accuracy achieved on the COLORMNIST.
+The first six rows of the table show the results achieved by six
+OoD methods using respectively random initialization (Rand),
+ERM initialization (ERM), RFC initialization (RFC). The last
+column, RFC(cf), reports the performance achieved by running
+the OoD algorithm on top of the frozen RFC representations. The
+seventh row reports the results achieved using ERM under the same
+conditions. The last row reminds us of the oracle performance
+achieved by a network using data from which the spurious feature
+(color) has been removed.
+</p>
+
+To reproduce the results, run: 
 
 `bash  script/coloredmnist/coloredmnist_rfc.sh`
+
+## Aiming for the second easiest-to-find feature is not OOD generalization
+A line of works seek OOD generalization by discovering the second easiest-to-find features, such as [PI](https://arxiv.org/abs/2105.12628). Here we claim that the second easiest-to-find feature is not the robust solution in general. To showcase the idea, we create a 'InverseColoredMNIST' dataset where the robust feature (digits) is more predictive than the spurious feature (color). 
+
+<p align="center">
+<image src="figures/inversecoloredmnist.png"/>
+</p>
+
+<p align="center">
+Tab2: OoD test accuracy of PI and OOD/ERM methods on COLOREDMNIST and INVERSECOLOREDMNIST. The OOD/ERM
+methods are trained on top of a frozen RFC representation.
+</p>
+
+
+To reproduce the results, run:
 
 `bash  script/coloredmnist/inversecoloredmnist_rfc.sh`
 
