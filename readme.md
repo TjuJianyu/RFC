@@ -31,30 +31,40 @@ The rule above is also the key idea of the proposed Rich Feature Construction (R
 
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
-OOD methods are sensitive to the network initialization. We test nine OOD methods, [IRMv1](https://arxiv.org/abs/1907.02893), [VREx](https://arxiv.org/abs/2003.00688), [FISH](https://arxiv.org/abs/2104.09937), [SD](https://arxiv.org/abs/2011.09468), [IGA](https://arxiv.org/abs/2008.01883), [LfF](https://arxiv.org/abs/2007.02561), [RSC](https://arxiv.org/abs/2007.02454), [CLOvE](https://arxiv.org/abs/2102.10395), [fishr](https://arxiv.org/abs/2109.02934), on the ColoredMNIST benchmark. 
-
-None of the nine OOD methods can work with a random initialzation. 
+OOD methods are sensitive to the network initialization. We test nine OOD methods, [IRMv1](https://arxiv.org/abs/1907.02893), [VREx](https://arxiv.org/abs/2003.00688), [FISH](https://arxiv.org/abs/2104.09937), [SD](https://arxiv.org/abs/2011.09468), [IGA](https://arxiv.org/abs/2008.01883), [LfF](https://arxiv.org/abs/2007.02561), [RSC](https://arxiv.org/abs/2007.02454), [CLOvE](https://arxiv.org/abs/2102.10395), [fishr](https://arxiv.org/abs/2109.02934), on the ColoredMNIST benchmark. Fig1 shows the OOD performance with different ERM pretrain-epochs. None of the nine OOD methods can work with a random initialzation. 
 
 <p align="center">
   <image src='figures/anneal_nll_full.png'/>
 </p>
 
 <p align="center">
-  Test performance of nine penalized OoD methods as
+  Fig1: Test performance of nine penalized OoD methods as
 a function of the number of epochs used to pre-train the neural
 network with ERM. The final OoD testing performance is very
 dependent on choosing the right number of pretraining epochs,
 illustrating the challenges of these optimization problems.
 </p>
  
+To reproduce the results, run: 
 `bash  script/coloredmnist/coloredmnist_anneal.sh`
 
+
 ## generalization difficulties of OOD methods (ColoredMNIST)
+
+Starting from a 'perfect' initialization where the model only uses the robust feature (OOD performance is maximized), what is going on if we continue training these OOD methods? Will they maintain the robustness? or decay to a spurious/singular solution? Fig2 (top) gives the latter answer. 
+
 <p align="center">
 <image src='figures/long_train_vstack.png'/>
 </p>
 
+<p align="center">
+  Fig2: Test performance of OoD methods as a function of training epochs. 
+  Top: Six OoD methods are trained from a ‘perfect’ initialization where only the robust feature is well learned. 
+  The blue star indicates the initial test accuracy. 
+  Bottom: The OoD methods are trained from the proposed (frozen) RFC representation.
+</p>
 
+To reproduce this results (top), run:
 `bash  script/coloredmnist/coloredmnist_perfect_initialization_longtrain.sh`
 
 ## The proposed RFC on ColoredMNIST and InverseColoredMNIST
