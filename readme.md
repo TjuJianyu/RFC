@@ -1,6 +1,6 @@
 # Official code for "[Rich Feature Construction for the Optimization-Generalization Dilemma](https://arxiv.org/pdf/2203.15516.pdf)"
 
-## Overview 
+## Overview
 In Machine Learning, defining a generalized goal (e.g. the invariant goal in out-of-distribution generalization) and finding a path to the goal (e.g. the many optimization tricks) are two key problems. Usually, there is a dilemma between the two. i.e. either the generalization goal is weak/poor or the optimization process is hard. This optimization-generalization dilemma is especially obvious in the out-of-distribution area. This work tries to solve this dilemma by creating a RICH and SIMPLE representation, such that the optimization process becomes easier with the representation. As a result, we can pursue a stronger generalization goal.
 
 
@@ -31,7 +31,9 @@ The rule above is also the key idea of the proposed Rich Feature Construction (R
 
 
 ## Optimization difficulties of OOD methods (ColoredMNIST)
-OOD methods are sensitive to the network initialization. None of the nine OOD methods can work with a random initialzation. 
+OOD methods are sensitive to the network initialization. We test nine OOD methods, [IRMv1](https://arxiv.org/abs/1907.02893), [VREx](https://arxiv.org/abs/2003.00688), [FISH](https://arxiv.org/abs/2104.09937), [SD](https://arxiv.org/abs/2011.09468), [IGA](https://arxiv.org/abs/2008.01883), [LfF](https://arxiv.org/abs/2007.02561), [RSC](https://arxiv.org/abs/2007.02454), [CLOvE](https://arxiv.org/abs/2102.10395), [fishr](https://arxiv.org/abs/2109.02934), on the ColoredMNIST benchmark. 
+
+None of the nine OOD methods can work with a random initialzation. 
 
 <p align="center">
   <image src='figures/anneal_nll_full.png'/>
@@ -67,14 +69,14 @@ illustrating the challenges of these optimization problems.
 <image src='figures/lambda_valid_test_irm_vrex_clove.png'>
 </p>
 
-### ERM baseline 
+### ERM baseline
 
 `python examples/run_expt.py --version "1.0" --root_dir ${directory to your data} --log_dir ${resdir} \
 --dataset camelyon17 --algorithm ERM --model densenet121 --seed ${final_seed} --save_step 1 \
 --weight_decay ${final_wd} `
 
 
-### IRM/VREX/CLOvE baseline 
+### IRM/VREX/CLOvE baseline
 
 `python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
 --log_dir ${resdir} --dataset camelyon17 \
