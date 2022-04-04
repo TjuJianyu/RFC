@@ -78,7 +78,7 @@ To reproduce the results (top), run:
 The proposed RFC method creates a **rich** & **simple** representation to solve the optimization-generalization dilemma above. Tab1 shows the comparison of Random initialization (Rand), ERM pretrained initialization (ERM), RFC pretrained initialization (RFC / RFC(cf)). The proposed RFC consistantly boost OOD methods. 
 
 <p align="center">
-<image src="figures/colormnist.png"/>
+<image src="figures/colormnist.png" width="200"/>
 </p>
 <p align="center">
   <em>Tab1: OoD testing accuracy achieved on the COLORMNIST.
@@ -102,7 +102,7 @@ To reproduce the results, run:
 A line of works seek OOD generalization by discovering the second easiest-to-find features, such as [PI](https://arxiv.org/abs/2105.12628). Here we claim that the second easiest-to-find feature is not the robust solution in general. To showcase the idea, we create a 'InverseColoredMNIST' dataset where the robust feature (digits) is more predictive than the spurious feature (color). 
 
 <p align="center">
-<image src="figures/inversecoloredmnist.png"/>
+<image src="figures/inversecoloredmnist.png" width="200" />
 </p>
 
 <p align="center">
@@ -122,7 +122,7 @@ To reproduce the results, run:
 
 
 | Network  Initialization   | Methods | Test Acc IID Tune | Test Acc OOD Tune | scripts | comments|
-|---------------------------|---------|-------------------|-------------------|---------|---------|
+|------|----------|-----------|-----------|-----------------|--------------|
 |-     | ERM      | 66.6±9.8  | 70.2±8.7  | [A](scripts/camelyon17/camelyon17_erm.sh) ||
 |ERM   | IRMv1    | 68.6±6.8  | 68.5±6.2  | [B](scripts/camelyon17/camelyon17_irm.sh) ||
 |ERM   | vREx     | 69.1±8.1  | 69.1±13.2 | [C](scripts/camelyon17/camelyon17_vrex.sh) ||
