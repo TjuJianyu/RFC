@@ -129,7 +129,7 @@ To reproduce the results, run:
 |-     | ERM      | 66.6±9.8  | 70.2±8.7  | [A](scripts/camelyon17/camelyon17_erm.sh) |
 |ERM   | IRMv1    | 68.6±6.8  | 68.5±6.2  | [B](scripts/camelyon17/camelyon17_irm.sh) |
 |ERM   | vREx     | 69.1±8.1  | 69.1±13.2 | [C](scripts/camelyon17/camelyon17_vrex.sh) |
-|ERM   |ERM(cf)   |         - |         - |           |
+|ERM   |ERM(cf)   |         - |         - |      -   |
 |ERM   |IRMv1(cf) | 69.6±10.5 | 70.7±10.0 | [A](scripts/camelyon17/camelyon17_erm.sh),[D](scripts/camelyon17/camelyon17_erm_irmlinear.sh) |
 |ERM   |vREx(cf)  | 69.6±10.5 | 70.6±10.0 | [A](scripts/camelyon17/camelyon17_erm.sh),[E](scripts/camelyon17/camelyon17_erm_vrexlinear.sh) |
 |ERM   |CLOvE(cf) | 69.6±10.5 | 69.2±9.5  | [A](scripts/camelyon17/camelyon17_erm.sh),[F](scripts/camelyon17/camelyon17_erm_clovelinear.sh) |
@@ -141,10 +141,10 @@ To reproduce the results, run:
 |2-RFC | IRMv1(cf)| 78.0±2.1  | 79.1±2.1  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [H](scripts/camelyon17camelyon17_rfc_r0r1_syn.sh), [L](scripts/camelyon17/camelyon17_rfc_r0r1_syneven_irm_linear.sh) |
 |2-RFC | vREx(cf) | 77.9±2.7  | 79.5±2.7  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [H](scripts/camelyon17camelyon17_rfc_r0r1_syn.sh), [M](scripts/camelyon17/camelyon17_rfc_r0r1_syneven_vrex_linear.sh) |
 |2-RFC | CLOvE(cf)| 77.8±2.2  | 78.6±2.6  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [H](scripts/camelyon17camelyon17_rfc_r0r1_syn.sh), [N](scripts/camelyon17/camelyon17_rfc_r0r1_syneven_clove_linear.sh) |
-|3-RFC | ERM(cf)  | 72.9±5.3  | 73.3±5.3  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17camelyon17_rfc_r0r1r2_syn.sh), [Q](scripts/camelyon17/camelyon17_rfc_r0r1r2_syneven_irm_linear.sh) |
-|3-RFC | IRMv1(cf)| 72.7±5.5  | 75.5±3.8  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17camelyon17_rfc_r0r1r2_syn.sh), [Q](scripts/camelyon17/camelyon17_rfc_r0r1r2_syneven_irm_linear.sh) |
-|3-RFC | vREx(cf) | 72.7±5.4  | 75.1±5.3  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17camelyon17_rfc_r0r1r2_syn.sh), [R](scripts/camelyon17/camelyon17_rfc_r0r1r2_syneven_vrex_linear.sh) |
-|3-RFC | vREx(cf) | 72.8±5.4  | 73.2±7.1  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17camelyon17_rfc_r0r1r2_syn.sh), [S](scripts/camelyon17/camelyon17_rfc_r0r1r2_syneven_clove_linear.sh) |
+|3-RFC | ERM(cf)  | 72.9±5.3  | 73.3±5.3  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn.sh), [Q](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn_irm_linear.sh) |
+|3-RFC | IRMv1(cf)| 72.7±5.5  | 75.5±3.8  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn.sh), [Q](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn_irm_linear.sh) |
+|3-RFC | vREx(cf) | 72.7±5.4  | 75.1±5.3  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn.sh), [R](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn_vrex_linear.sh) |
+|3-RFC | vREx(cf) | 72.8±5.4  | 73.2±7.1  | [A](scripts/camelyon17/camelyon17_erm.sh),[G](scripts/camelyon17/camelyon17_rfc_r1.sh), [O](scripts/camelyon17/camelyon17_rfc_r2.sh), [P](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn.sh), [S](scripts/camelyon17/camelyon17_rfc_r0r1r2_syn_clove_linear.sh) |
 
 
 
