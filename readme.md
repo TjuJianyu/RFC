@@ -74,7 +74,7 @@ To reproduce the results (top), run:
 The proposed RFC method creates a **rich** & **simple** representation to solve the optimization-generalization dilemma above. Tab1 shows the comparison of Random initialization (Rand), ERM pretrained initialization (ERM), RFC pretrained initialization (RFC / RFC(cf)). The proposed RFC consistantly boost OOD methods. 
 
 <p align="center">
-<image src="figures/coloredmnist.png"/>
+<image src="figures/colormnist.png"/>
 </p>
 <p align="center">
   Tab1: OoD testing accuracy achieved on the COLORMNIST.
