@@ -38,11 +38,11 @@ OOD methods are sensitive to the network initialization. We test nine OOD method
 </p>
 
 <p align="center">
-  Fig1: Test performance of nine penalized OoD methods as
+  *Fig1: Test performance of nine penalized OoD methods as
 a function of the number of epochs used to pre-train the neural
 network with ERM. The final OoD testing performance is very
 dependent on choosing the right number of pretraining epochs,
-illustrating the challenges of these optimization problems.
+illustrating the challenges of these optimization problems.*
 </p>
  
 To reproduce the results, run: 
@@ -59,10 +59,10 @@ Starting from a 'perfect' initialization where the model only uses the robust fe
 </p>
 
 <p align="center">
-  Fig2: Test performance of OoD methods as a function of training epochs. 
+  *Fig2: Test performance of OoD methods as a function of training epochs. 
   Top: Six OoD methods are trained from a ‘perfect’ initialization where only the robust feature is well learned. 
   The blue star indicates the initial test accuracy. 
-  Bottom: The OoD methods are trained from the proposed (frozen) RFC representation.
+  Bottom: The OoD methods are trained from the proposed (frozen) RFC representation.*
 </p>
 
 To reproduce the results (top), run:
@@ -77,7 +77,7 @@ The proposed RFC method creates a **rich** & **simple** representation to solve 
 <image src="figures/colormnist.png"/>
 </p>
 <p align="center">
-  Tab1: OoD testing accuracy achieved on the COLORMNIST.
+  *Tab1: OoD testing accuracy achieved on the COLORMNIST.
 The first six rows of the table show the results achieved by six
 OoD methods using respectively random initialization (Rand),
 ERM initialization (ERM), RFC initialization (RFC). The last
@@ -86,7 +86,7 @@ the OoD algorithm on top of the frozen RFC representations. The
 seventh row reports the results achieved using ERM under the same
 conditions. The last row reminds us of the oracle performance
 achieved by a network using data from which the spurious feature
-(color) has been removed.
+(color) has been removed.*
 </p>
 
 To reproduce the results, run: 
@@ -101,8 +101,8 @@ A line of works seek OOD generalization by discovering the second easiest-to-fin
 </p>
 
 <p align="center">
-Tab2: OoD test accuracy of PI and OOD/ERM methods on COLOREDMNIST and INVERSECOLOREDMNIST. The OOD/ERM
-methods are trained on top of a frozen RFC representation.
+*Tab2: OoD test accuracy of PI and OOD/ERM methods on COLOREDMNIST and INVERSECOLOREDMNIST. The OOD/ERM
+methods are trained on top of a frozen RFC representation.*
 </p>
 
 
