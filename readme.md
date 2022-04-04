@@ -151,4 +151,17 @@ To reproduce the results, run:
 
 
 
+## Citation
+If you find our code useful, please consider citing our work using the bibtex:
+
+
+`
+@article{zhang2022rich,
+  title={Rich Feature Construction for the Optimization-Generalization Dilemma},
+  author={Zhang, Jianyu and Lopez-Paz, David and Bottou, L{\'e}on},
+  journal={arXiv preprint arXiv:2203.15516},
+  year={2022}
+}
+`
+
 
