@@ -126,13 +126,13 @@ To reproduce the results, run:
 
 | Network  Initialization   | Methods | Test Acc IID Tune | Test Acc OOD Tune | scripts |
 |---------------------------|---------|-------------------|-------------------|---------|
-|-     | ERM      | 66.6±9.8  | 70.2±8.7  | [\*](scripts/camelyon17/camelyon17_erm.sh) |
-|ERM   | IRMv1    | 68.6±6.8  | 68.5±6.2  | [\*](scripts/camelyon17/camelyon17_irm.sh) |
-|ERM   | vREx     | 69.1±8.1  | 69.1±13.2 | [\*](scripts/camelyon17/camelyon17_vrex.sh) |
-|ERM   |ERM(cf)   |         - |         - |
-|ERM   |IRMv1(cf) | 69.6±10.5 | 70.7±10.0 |
-|ERM   |vREx(cf)  | 69.6±10.5 | 70.6±10.0 |
-|ERM   |CLOvE(cf) | 69.6±10.5 | 69.2±9.5  |
+|-     | ERM      | 66.6±9.8  | 70.2±8.7  | [a](scripts/camelyon17/camelyon17_erm.sh) |
+|ERM   | IRMv1    | 68.6±6.8  | 68.5±6.2  | [b](scripts/camelyon17/camelyon17_irm.sh) |
+|ERM   | vREx     | 69.1±8.1  | 69.1±13.2 | [c](scripts/camelyon17/camelyon17_vrex.sh) |
+|ERM   |ERM(cf)   |         - |         - |           |
+|ERM   |IRMv1(cf) | 69.6±10.5 | 70.7±10.0 | [a](scripts/camelyon17/camelyon17_erm.sh)[d](scripts/camelyon17/camelyon17_erm_irmlinear.sh) |
+|ERM   |vREx(cf)  | 69.6±10.5 | 70.6±10.0 | [a](scripts/camelyon17/camelyon17_erm.sh)[e](scripts/camelyon17/camelyon17_erm_vrexlinear.sh) |
+|ERM   |CLOvE(cf) | 69.6±10.5 | 69.2±9.5  | [a](scripts/camelyon17/camelyon17_erm.sh)[f](scripts/camelyon17/camelyon17_erm_clovelinear.sh) |
 |2-RFC | ERM      | 72.8±3.2  | 74.7±4.3  |
 |2-RFC | IRMv1    | 71.6±4.2  | 75.3±4.8  |
 |2-RFC | vREx     |  73.4±3.3 | 76.4±5.3  |
@@ -145,21 +145,6 @@ To reproduce the results, run:
 |3-RFC | IRMv1(cf)| 72.7±5.5  | 75.5±3.8  |
 |3-RFC | vREx(cf) | 72.7±5.4  | 75.1±5.3  |
 |3-RFC | vREx(cf) | 72.8±5.4  | 73.2±7.1  |
-
-### ERM baseline
-
-`python examples/run_expt.py --version "1.0" --root_dir ${directory to your data} --log_dir ${resdir} \
---dataset camelyon17 --algorithm ERM --model densenet121 --seed ${final_seed} --save_step 1 \
---weight_decay ${final_wd} `
-
-
-### IRM/VREX/CLOvE baseline
-
-`python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
---log_dir ${resdir} --dataset camelyon17 \
---algorithm IRM/VREX/CLOvE \
---model densenet121 --seed ${final_seed} --save_step 1 --irm_penalty_anneal_iters ${final_anneal} \
---irm_lambda ${final_lambda} --kernel_scale ${kernel_scale_for_CLOvE}`
 
 
 
