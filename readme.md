@@ -38,11 +38,13 @@ OOD methods are sensitive to the network initialization. We test nine OOD method
 </p>
 
 <p align="center">
-  *Fig1: Test performance of nine penalized OoD methods as
+<em>
+  Fig1: Test performance of nine penalized OoD methods as
 a function of the number of epochs used to pre-train the neural
 network with ERM. The final OoD testing performance is very
 dependent on choosing the right number of pretraining epochs,
-illustrating the challenges of these optimization problems.*
+illustrating the challenges of these optimization problems.
+</em>
 </p>
  
 To reproduce the results, run: 
@@ -59,10 +61,12 @@ Starting from a 'perfect' initialization where the model only uses the robust fe
 </p>
 
 <p align="center">
-  *Fig2: Test performance of OoD methods as a function of training epochs. 
+<em>
+  Fig2: Test performance of OoD methods as a function of training epochs. 
   Top: Six OoD methods are trained from a ‘perfect’ initialization where only the robust feature is well learned. 
   The blue star indicates the initial test accuracy. 
-  Bottom: The OoD methods are trained from the proposed (frozen) RFC representation.*
+  Bottom: The OoD methods are trained from the proposed (frozen) RFC representation.
+</em>
 </p>
 
 To reproduce the results (top), run:
@@ -77,7 +81,7 @@ The proposed RFC method creates a **rich** & **simple** representation to solve 
 <image src="figures/colormnist.png"/>
 </p>
 <p align="center">
-  *Tab1: OoD testing accuracy achieved on the COLORMNIST.
+  <em>Tab1: OoD testing accuracy achieved on the COLORMNIST.
 The first six rows of the table show the results achieved by six
 OoD methods using respectively random initialization (Rand),
 ERM initialization (ERM), RFC initialization (RFC). The last
@@ -86,7 +90,8 @@ the OoD algorithm on top of the frozen RFC representations. The
 seventh row reports the results achieved using ERM under the same
 conditions. The last row reminds us of the oracle performance
 achieved by a network using data from which the spurious feature
-(color) has been removed.*
+(color) has been removed.
+</em>
 </p>
 
 To reproduce the results, run: 
@@ -101,8 +106,10 @@ A line of works seek OOD generalization by discovering the second easiest-to-fin
 </p>
 
 <p align="center">
-*Tab2: OoD test accuracy of PI and OOD/ERM methods on COLOREDMNIST and INVERSECOLOREDMNIST. The OOD/ERM
-methods are trained on top of a frozen RFC representation.*
+<em>
+Tab2: OoD test accuracy of PI and OOD/ERM methods on COLOREDMNIST and INVERSECOLOREDMNIST. The OOD/ERM
+methods are trained on top of a frozen RFC representation.
+</em>
 </p>
 
 
@@ -112,9 +119,37 @@ To reproduce the results, run:
 
 
 ## Camelyon17 experiments
+
 <p align="center">
 <image src='figures/lambda_valid_test_irm_vrex_clove.png'>
 </p>
+
+| Network  Initialization   | Methods | Test Acc IID Tune | Test Acc OOD Tune | scripts |
+|---------------------------|---------|-------------------|-------------------|---------|
+|-                          | ERM     | 66.6±9.8      | 70.2±8.7      |
+|ERM   | IRMv1    | 68.6±6.8  | 68.5±6.2  |
+|ERM   | vREx     | 69.1±8.1  | 69.1±13.2 |
+|ERM   | CLOvE    | 71.7±10.2 | 69.0±12.1 |
+|---------------------------|---------|-------------------|-------------------|---------|
+|ERM   |ERM(cf)   | - | - |
+|ERM   |IRMv1(cf) | 69.6±10.5 | 70.7±10.0 |
+|ERM   |vREx(cf)  | 69.6±10.5 | 70.6±10.0 |
+|ERM   |CLOvE(cf) | 69.6±10.5 | 69.2±9.5  |
+|---------------------------|---------|-------------------|-------------------|---------|
+|2-RFC | ERM      | 72.8±3.2  | 74.7±4.3  |
+|2-RFC | IRMv1    | 71.6±4.2  | 75.3±4.8  |
+|2-RFC | vREx     |  73.4±3.3 | 76.4±5.3  |
+|2-RFC | CLOvE    | 74.0±4.6  | 76.6±5.3  |
+|---------------------------|---------|-------------------|-------------------|---------|
+|2-RFC | ERM(cf)  | 78.2±2.6  | 78.6±2.6  |
+|2-RFC | IRMv1(cf)| 78.0±2.1  | 79.1±2.1  |
+|2-RFC | vREx(cf) | 77.9±2.7  | 79.5±2.7  |
+|2-RFC | CLOvE(cf)| 77.8±2.2  | 78.6±2.6  |
+|---------------------------|---------|-------------------|-------------------|---------|
+|3-RFC | ERM(cf)  | 72.9±5.3  | 73.3±5.3  |
+|3-RFC | IRMv1(cf)| 72.7±5.5  | 75.5±3.8  |
+|3-RFC | vREx(cf) | 72.7±5.4  | 75.1±5.3  |
+|3-RFC | vREx(cf) | 72.8±5.4  | 73.2±7.1  |
 
 ### ERM baseline
 
