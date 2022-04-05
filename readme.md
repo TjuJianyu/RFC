@@ -121,7 +121,7 @@ To reproduce the results, run:
 ## Camelyon17 experiments
 
 
-| Network  Initialization |  Methods | Test Acc IID Tune | Test Acc OOD Tune | scripts | comments|
+| Network <br> Initialization |  Methods | Test Acc <br> IID Tune | Test Acc <br> OOD Tune | scripts | comments|
 |------|----------|-----------|-----------|-----------------|--------------|
 |-     | ERM      | 66.6±9.8  | 70.2±8.7  | [A](scripts/camelyon17/camelyon17_erm.sh) ||
 |ERM   | IRMv1    | 68.6±6.8  | 68.5±6.2  | [B](scripts/camelyon17/camelyon17_irm.sh) ||
