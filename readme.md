@@ -1,7 +1,10 @@
-# Official code for "[Rich Feature Construction for the Optimization-Generalization Dilemma](https://arxiv.org/pdf/2203.15516.pdf)"
+# Bonsai method
+Official code of "Rich Feature Construction for the Optimization-Generalization Dilemma"[(https://arxiv.org/pdf/2203.15516.pdf)](https://arxiv.org/pdf/2203.15516.pdf)
 
 ## Overview
 In Machine Learning, defining a generalized goal (e.g. the invariant goal in out-of-distribution generalization) and finding a path to the goal (e.g. the many optimization tricks) are two key problems. Usually, there is a dilemma between the two. i.e. either the generalization goal is weak/poor or the optimization process is hard. This optimization-generalization dilemma is especially obvious in the out-of-distribution area. This work tries to solve this dilemma by creating a RICH and SIMPLE representation, such that the optimization process becomes easier with the representation. As a result, we can pursue a stronger generalization goal.
+
+![Pomegranate (Punica granatum), Moyogi style, about 50 years old, at the Bonsai museum in Pescia, Italy. (from Wikipedia)](https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Pescia%2C_museo_del_bonsai%2C_punica_granatum%2C_stile_moyogi_%28eretto_informale%29%2C_con_frutti.jpg/1920px-Pescia%2C_museo_del_bonsai%2C_punica_granatum%2C_stile_moyogi_%28eretto_informale%29%2C_con_frutti.jpg)
 
 
 
@@ -12,7 +15,7 @@ Can we build a spacecraft by purely thinking about the "spacecraft"? No. The spa
 
 The story above revises the path to hard problems, that is "Search/develop diverse areas (directions). Then a clear path may appear upon them. Otherwise, continuing search more."
 
-The rule above is also the key idea of the proposed Rich Feature Construction (RFC) method. 
+The rule above is also the key idea of the proposed Bonsai method. 
 
 
 
