@@ -64,7 +64,7 @@ do
 done
 
 #resdir=results/debug
-resdir=results/syn_${final_method}_camelyon17_${mark}_eval${final_mode}_wd${final_wd}_seed${final_seed}/
+resdir=results/syn_camelyon17_${mark}_eval${final_mode}_wd${final_wd}_seed${final_seed}/
 mkdir $resdir
 
 
