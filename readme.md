@@ -1,7 +1,7 @@
 # Official code for "[Rich Feature Construction for the Optimization-Generalization Dilemma](https://arxiv.org/pdf/2203.15516.pdf)"
 
 
-**This branch is the original code to reproduce the experiments. But not super clean and not easyt-to-adapt. I will give a clean, easy-to-adapt version at the v2.0 branch. **
+**This branch is the original code to reproduce the experiments. But not super clean. I will give a clean version at the v2.0 branch. **
 
 
 ## Overview
