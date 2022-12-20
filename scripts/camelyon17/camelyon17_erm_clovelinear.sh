@@ -52,22 +52,22 @@ resdir=results/clovelinear_ks${final_ks}_camelyon17_${mark}_lambda${final_lambda
 syndir=results/erm_camelyon17_wd0.01_seed${final_seed}
 mkdir $resdir
 
-python examples/analysis_earlystop.py --result_dir ${syndir}
+python src/analysis_earlystop.py --result_dir ${syndir}
 
 
-python examples/run_expt_rfc_eval.py --version "1.0" --root_dir data/camelyon17/ \
+python src/run_expt_rfc_eval.py --version "1.0" --root_dir data/camelyon17/ \
 --log_dir ${syndir} --eval_only \
 --eval_epoch `cat ${syndir}/eval_epochs_${final_mode}.txt` \
 --dataset camelyon17 --algorithm ERM --model densenet121 --seed ${final_seed}
 
 
-python examples/generate_groups.py --dataset camelyon17 \
+python src/generate_groups.py --dataset camelyon17 \
 --pred_dirs ${syndir} \
 --pred_epochs `cat ${syndir}/eval_epochs_${final_mode}.txt` \
 --pred_seed ${final_seed}  --result_dir ${syndir} 
 
 
-python examples/run_expt_synthesis_convert_model.py  \
+python src/run_expt_synthesis_convert_model.py  \
 --version "1.0" --root_dir data/camelyon17/ --save_step 1  \
 --rfc_groups_dir  ${syndir} \
 --log_dir ${syndir} \
@@ -79,7 +79,7 @@ python examples/run_expt_synthesis_convert_model.py  \
 
 echo "converted model"
 
-python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
+python src/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
 --log_dir ${resdir} \
 --dataset camelyon17 --algorithm CLOvE --model densenet121 --seed ${final_seed} \
 --save_step 1 --irm_penalty_anneal_iters 0 --irm_lambda ${final_lambda} --resume \
