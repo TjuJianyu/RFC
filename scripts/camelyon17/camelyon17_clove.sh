@@ -34,7 +34,7 @@ final_seed=${seeds[$SLURM_ARRAY_TASK_ID]}
 final_anneal=${anneals[$SLURM_ARRAY_TASK_ID]}
 final_lambda=${lambdas[$SLURM_ARRAY_TASK_ID]}
 
-python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
+python src/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
 --log_dir results/clove_ks0.1_camelyon17_anneal${final_anneal}_lambda${final_lambda}_seed${final_seed} \
 --dataset camelyon17 --algorithm CLOvE --model densenet121 --seed ${final_seed} \
 --save_step 1 --irm_penalty_anneal_iters ${final_anneal} --irm_lambda ${final_lambda} --kernel_scale 0.1
