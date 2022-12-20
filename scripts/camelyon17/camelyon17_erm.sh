@@ -33,7 +33,7 @@ final_wd=${wds[$SLURM_ARRAY_TASK_ID]}
 
 
 resdir=results/erm_camelyon17_wd${final_wd}_seed${final_seed}
-python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ --log_dir ${resdir} \
+python src/run_expt.py --version "1.0" --root_dir data/camelyon17/ --log_dir ${resdir} \
 --dataset camelyon17 --algorithm ERM --model densenet121 --seed ${final_seed} --save_step 1 \
 --weight_decay ${final_wd}
 
