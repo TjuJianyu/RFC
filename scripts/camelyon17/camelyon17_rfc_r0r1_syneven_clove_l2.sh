@@ -47,10 +47,10 @@ syndir=results/syn_camelyon17_2round_rfc1erm_rfc20.01_even_evaliid_wd${final_syn
 
 mkdir $resdir
 
-python examples/analysis_earlystop.py --result_dir ${syndir}
+python src/analysis_earlystop.py --result_dir ${syndir}
 
 
-python examples/run_expt_synthesis_convert_model.py  \
+python src/run_expt_synthesis_convert_model.py  \
 --version "1.0" --root_dir data/camelyon17/ --save_step 1  \
 --rfc_groups_dir  ${syndir} \
 --log_dir ${syndir} \
@@ -62,7 +62,7 @@ python examples/run_expt_synthesis_convert_model.py  \
 
 echo "converted model"
 
-python examples/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
+python src/run_expt.py --version "1.0" --root_dir data/camelyon17/ \
 --log_dir ${resdir} --weight_decay ${final_synwd} \
 --dataset camelyon17 --algorithm CLOvE --model densenet121 --seed ${final_seed} \
 --save_step 1 --irm_penalty_anneal_iters 0 --irm_lambda ${final_lambda} --resume \
