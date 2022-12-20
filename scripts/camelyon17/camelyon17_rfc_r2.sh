@@ -59,13 +59,13 @@ resdir=results/rfc_camelyon17_${mark}_eval${final_mode}_wd${final_wd}_seed${fina
 mkdir $resdir
 
 
-python examples/generate_groups.py --dataset camelyon17 \
+python src/generate_groups.py --dataset camelyon17 \
 --pred_dirs ${source1_dir} ${source2_dir} \
 --pred_epochs `cat ${source1_dir}/eval_epochs_${final_mode}.txt` `cat ${source2_dir}/eval_epochs_${final_mode}.txt` \
 --pred_seed ${final_seed}  --result_dir ${resdir}  
 
 
-python examples/run_expt_rfc.py --version "1.0" --root_dir data/camelyon17/ --save_step 1 \
+python src/run_expt_rfc.py --version "1.0" --root_dir data/camelyon17/ --save_step 1 \
 --rfc_groups_dir ${resdir} --log_dir ${resdir} --weight_decay ${final_wd} \
 --dataset camelyon17 --algorithm groupDRO --model densenet121 --seed ${final_seed}
 
