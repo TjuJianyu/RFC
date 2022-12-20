@@ -54,27 +54,27 @@ source2_dir=results/rfc_camelyon17_eval${final_mode}_wd0.01_seed${final_seed}
 for source_dir in ${source1_dir} ${source2_dir};
 do
 	echo ${source_dir}
-	python examples/analysis_earlystop.py --result_dir ${source_dir}/	
+	python src/analysis_earlystop.py --result_dir ${source_dir}/	
 
-	python examples/run_expt_rfc_eval.py --version "1.0" --root_dir data/camelyon17/ \
+	python src/run_expt_rfc_eval.py --version "1.0" --root_dir data/camelyon17/ \
 	--log_dir ${source_dir} --eval_only \
 	--eval_epoch `cat ${source_dir}/eval_epochs_${final_mode}.txt` \
 	--dataset camelyon17 --algorithm ERM --model densenet121 --seed ${final_seed}
 
 done
 
-#resdir=results/debug
+
 resdir=results/syn_${final_method}_camelyon17_${mark}_eval${final_mode}_wd${final_wd}_seed${final_seed}/
 mkdir $resdir
 
 
-python examples/generate_groups.py --dataset camelyon17 \
+python src/generate_groups.py --dataset camelyon17 \
 --pred_dirs ${source1_dir} ${source2_dir} \
 --pred_epochs `cat ${source1_dir}/eval_epochs_${final_mode}.txt` `cat ${source2_dir}/eval_epochs_${final_mode}.txt` \
 --pred_seed ${final_seed}  --result_dir ${resdir}  
 
 
-python examples/run_expt_synthesis.py --version "1.0" --root_dir data/camelyon17/ --save_step 1 \
+python src/run_expt_synthesis.py --version "1.0" --root_dir data/camelyon17/ --save_step 1 \
 --rfc_groups_dir ${resdir} --log_dir ${resdir} --weight_decay ${final_wd} --n_epochs 20 \
 --dataset camelyon17 --algorithm mtERM --model densenet121 --seed ${final_seed} \
 --distinct_groups True --uniform_over_groups True --n_groups_per_batch 2 --train_loader group \
