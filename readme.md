@@ -160,11 +160,13 @@ If you find our code useful, please consider citing our work using the bibtex:
 
 
 ```
-@article{zhang2022rich,
-  title={Rich Feature Construction for the Optimization-Generalization Dilemma},
+@inproceedings{zhang2022rich,
+  title={Rich feature construction for the optimization-generalization dilemma},
   author={Zhang, Jianyu and Lopez-Paz, David and Bottou, L{\'e}on},
-  journal={arXiv preprint arXiv:2203.15516},
-  year={2022}
+  booktitle={International Conference on Machine Learning},
+  pages={26397--26411},
+  year={2022},
+  organization={PMLR}
 }
 ```
 
